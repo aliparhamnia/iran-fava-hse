@@ -1,0 +1,23 @@
+name: hse-ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Hse.Platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - run: dotnet restore Hse.Platform.slnx
+      - run: dotnet build Hse.Platform.slnx --no-restore -c Release
+      - run: dotnet test test/Hse.Platform.Domain.Tests/Hse.Platform.Domain.Tests.csproj --no-build -c Release
+      - run: dotnet test test/Hse.Platform.Architecture.Tests/Hse.Platform.Architecture.Tests.csproj --no-build -c Release

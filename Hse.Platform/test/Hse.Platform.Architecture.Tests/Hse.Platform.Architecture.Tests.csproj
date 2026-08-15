@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Hse.Platform</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Hse.Platform.Domain\Hse.Platform.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Hse.Platform.Application.Contracts\Hse.Platform.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\Hse.Platform.Application\Hse.Platform.Application.csproj" />
+    <ProjectReference Include="..\..\src\Hse.Platform.EntityFrameworkCore\Hse.Platform.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageReference Include="Shouldly" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+﻿using Hse.Platform.EntityFrameworkCore;
+using Volo.Abp.Autofac;
+using Volo.Abp.Modularity;
+
+namespace Hse.Platform.DbMigrator;
+
+[DependsOn(
+    typeof(AbpAutofacModule),
+    typeof(PlatformEntityFrameworkCoreModule),
+    typeof(PlatformApplicationContractsModule)
+)]
+public class PlatformDbMigratorModule : AbpModule
+{
+}

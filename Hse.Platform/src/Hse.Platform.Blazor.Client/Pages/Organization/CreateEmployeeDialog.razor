@@ -1,0 +1,50 @@
+@inherits PlatformComponentBase
+@using Hse.Platform.Organization
+@using Hse.Platform.Blazor.Client.Components
+@inject IEmployeeAppService EmployeeAppService
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField @bind-Value="_input.EmployeeNumber" Label="@L["EmployeeNumber"]" />
+        <MudTextField @bind-Value="_input.FirstName" Label="@L["FirstName"]" Class="mt-2" />
+        <MudTextField @bind-Value="_input.LastName" Label="@L["LastName"]" Class="mt-2" />
+        <MudTextField @bind-Value="_input.NationalId" Label="@L["NationalId"]" Class="mt-2" />
+        <div class="mt-2">
+            <AppDatePicker @bind-Value="_input.HireDate" Label="@L["HireDate"]" />
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="SaveAsync" Disabled="_saving">@L["CreateEmployee"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public EventCallback OnSaved { get; set; }
+
+    private readonly CreateEmployeeDto _input = new();
+    private bool _saving;
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private async Task SaveAsync()
+    {
+        _saving = true;
+        try
+        {
+            await EmployeeAppService.CreateAsync(_input);
+            await OnSaved.InvokeAsync();
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+        finally
+        {
+            _saving = false;
+        }
+    }
+}

@@ -1,0 +1,106 @@
+@using System.Globalization
+@using Hse.Platform.Blazor.Client.Theming
+
+<MudStack Spacing="1">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <MudText Typo="Typo.caption">@Label</MudText>
+    }
+    @if (CultureCalendar.IsPersian())
+    {
+        <MudStack Row="true" Spacing="1">
+            <MudNumericField T="int" Label="@YearLabel" Value="_year" ValueChanged="OnYearChanged" Min="1270" Max="1500" />
+            <MudSelect T="int" Label="@MonthLabel" Value="_month" ValueChanged="OnMonthChanged">
+                @for (var m = 1; m <= 12; m++)
+                {
+                    var month = m;
+                    <MudSelectItem Value="month">@PersianMonths[month - 1]</MudSelectItem>
+                }
+            </MudSelect>
+            <MudNumericField T="int" Label="@DayLabel" Value="_day" ValueChanged="OnDayChanged" Min="1" Max="@_daysInMonth" />
+        </MudStack>
+    }
+    else
+    {
+        <MudDatePicker Date="_gregorian" DateChanged="OnGregorianChanged" DateFormat="yyyy-MM-dd" />
+    }
+</MudStack>
+
+@code {
+    private static readonly string[] PersianMonths =
+    [
+        "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+        "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+    ];
+
+    private int _year;
+    private int _month = 1;
+    private int _day = 1;
+    private int _daysInMonth = 31;
+    private DateTime? _gregorian;
+
+    [Parameter] public DateOnly? Value { get; set; }
+    [Parameter] public EventCallback<DateOnly?> ValueChanged { get; set; }
+    [Parameter] public string? Label { get; set; }
+
+    private string YearLabel => CultureCalendar.IsPersian() ? "سال" : "Year";
+    private string MonthLabel => CultureCalendar.IsPersian() ? "ماه" : "Month";
+    private string DayLabel => CultureCalendar.IsPersian() ? "روز" : "Day";
+
+    protected override void OnParametersSet()
+    {
+        if (Value is { } date)
+        {
+            var persian = CultureCalendar.ToPersian(date);
+            _year = persian.Year;
+            _month = persian.Month;
+            _day = persian.Day;
+            _daysInMonth = CultureCalendar.GetDaysInMonth(_year, _month);
+            _gregorian = date.ToDateTime(TimeOnly.MinValue);
+        }
+        else if (_year == 0)
+        {
+            var today = CultureCalendar.ToPersian(DateOnly.FromDateTime(DateTime.Today));
+            _year = today.Year;
+            _month = today.Month;
+            _day = today.Day;
+            _daysInMonth = CultureCalendar.GetDaysInMonth(_year, _month);
+        }
+    }
+
+    private Task OnYearChanged(int year)
+    {
+        _year = year;
+        return PublishPersianAsync();
+    }
+
+    private Task OnMonthChanged(int month)
+    {
+        _month = month;
+        return PublishPersianAsync();
+    }
+
+    private Task OnDayChanged(int day)
+    {
+        _day = day;
+        return PublishPersianAsync();
+    }
+
+    private async Task OnGregorianChanged(DateTime? date)
+    {
+        _gregorian = date;
+        DateOnly? value = date is null ? null : DateOnly.FromDateTime(date.Value);
+        await ValueChanged.InvokeAsync(value);
+    }
+
+    private async Task PublishPersianAsync()
+    {
+        _daysInMonth = CultureCalendar.GetDaysInMonth(_year, _month);
+        if (_day > _daysInMonth)
+        {
+            _day = _daysInMonth;
+        }
+
+        await ValueChanged.InvokeAsync(CultureCalendar.FromPersian(_year, _month, _day));
+    }
+}

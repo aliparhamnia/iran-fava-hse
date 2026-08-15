@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/Logs/
+**/BlobStoring/
+**/.vs/
+**/.idea/
+.git/
+test/
+*.user
+*.pfx

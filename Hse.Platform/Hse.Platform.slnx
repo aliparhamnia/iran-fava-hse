@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/Hse.Platform.Domain/Hse.Platform.Domain.csproj" />
+        <Project Path="src/Hse.Platform.Application/Hse.Platform.Application.csproj" />
+        <Project Path="src/Hse.Platform.EntityFrameworkCore/Hse.Platform.EntityFrameworkCore.csproj" />
+        <Project Path="src/Hse.Platform.Domain.Shared/Hse.Platform.Domain.Shared.csproj" />
+        <Project Path="src/Hse.Platform.Application.Contracts/Hse.Platform.Application.Contracts.csproj" />
+        <Project Path="src/Hse.Platform.HttpApi/Hse.Platform.HttpApi.csproj" />
+        <Project Path="src/Hse.Platform.HttpApi.Client/Hse.Platform.HttpApi.Client.csproj" />
+        <Project Path="src/Hse.Platform.DbMigrator/Hse.Platform.DbMigrator.csproj" />
+        <Project Path="src/Hse.Platform.Blazor/Hse.Platform.Blazor.csproj" />
+        <Project Path="src/Hse.Platform.Blazor.Client/Hse.Platform.Blazor.Client.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/Hse.Platform.Application.Tests/Hse.Platform.Application.Tests.csproj" />
+        <Project Path="test/Hse.Platform.EntityFrameworkCore.Tests/Hse.Platform.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/Hse.Platform.TestBase/Hse.Platform.TestBase.csproj" />
+        <Project Path="test/Hse.Platform.Domain.Tests/Hse.Platform.Domain.Tests.csproj" />
+        <Project Path="test/Hse.Platform.Architecture.Tests/Hse.Platform.Architecture.Tests.csproj" />
+        <Project Path="test/Hse.Platform.HttpApi.Client.ConsoleTestApp/Hse.Platform.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

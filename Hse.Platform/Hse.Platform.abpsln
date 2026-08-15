@@ -1,0 +1,56 @@
+{
+  "id": "19fea95e-6063-41a2-b2f5-c3f6fc7c1780",
+  "creationTime": "08/15/2026 20:16:00 +00:00",
+  "template": "app",
+  "versions": {
+    "AbpFramework": "10.6.0",
+    "AbpStudio": "3.0.10",
+    "TargetDotnetFramework": "net10.0"
+  },
+  "modules": {
+    "Hse.Platform": {
+      "path": "Hse.Platform.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": [
+      
+      ]
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app",
+    "createdAbpStudioVersion": "3.0.10",
+    "creationTool": "ABP Studio CLI",
+    "tiered": "false",
+    "runInstallLibs": "",
+    "useLocalReferences": "false",
+    "multiTenancy": "true",
+    "includeTests": "true",
+    "kubernetesConfiguration": "false",
+    "uiFramework": "blazor-webapp",
+    "blazorUiLibrary": "mudblazor",
+    "mobileFramework": "none",
+    "distributedEventBus": "none",
+    "databaseProvider": "ef",
+    "runDbMigrator": "",
+    "databaseManagementSystem": "sqlserver",
+    "separateTenantSchema": "false",
+    "createInitialMigration": "",
+    "theme": "basic",
+    "themeStyle": "",
+    "themeMenuPlacement": "",
+    "mobileFramework": "none",
+    "publicWebsite": "false",
+    "socialLogin": "false",
+    "sampleCrudPage": "false",
+    "selectedLanguages": ["English", "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Czech", "English (UK)", "Finnish", "French", "German (Germany)", "Hindi ", "Hungarian", "Icelandic", "Italian", "Portuguese (Brazil)", "Romanian (Romania)", "Russian", "Slovak", "Spanish", "Swedish", "Turkish", ],
+    "defaultLanguage": "English",
+    "createCommand": "abp new Hse.Platform -t app --ui-framework blazor-webapp --blazor-ui-library mudblazor --database-provider ef --database-management-system sqlserver --theme basic --skip-migration  --skip-migrator  --without-cms-kit --dont-run-install-libs --dont-run-bundling --use-open-source-template"
+  }
+}

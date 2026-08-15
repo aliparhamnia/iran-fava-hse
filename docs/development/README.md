@@ -1,0 +1,18 @@
+# Development Docs
+
+- [abp-conventions.md](abp-conventions.md)
+- [localization.md](localization.md)
+- [coding-standards.md](coding-standards.md)
+- [git.md](git.md)
+- [definition-of-done.md](definition-of-done.md)
+- [feature-plan-template.md](feature-plan-template.md)
+- [testing.md](testing.md)
+- [validation.md](validation.md)
+- [logging.md](logging.md)
+- [configuration.md](configuration.md)
+- [performance.md](performance.md)
+- [workflow.md](workflow.md)
+- [audit.md](audit.md)
+- [files.md](files.md)
+- [notifications.md](notifications.md)
+- [reporting.md](reporting.md)

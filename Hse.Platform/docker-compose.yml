@@ -1,0 +1,24 @@
+# Local Foundation stack. Web host is run with `dotnet run` (see README).
+# Optional full stack later: build src/Hse.Platform.Blazor/Dockerfile.
+#
+# Apple Silicon: SQL Server amd64 images crash under QEMU
+# ("Invalid mapping of address"). Azure SQL Edge is ARM-native for local dev.
+# Linux/CI can swap the image to mcr.microsoft.com/mssql/server:2025-CU1-ubuntu-24.04.
+services:
+  db:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Hse_Dev_Passw0rd!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - hse-sql:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Hse_Dev_Passw0rd!" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  hse-sql:
