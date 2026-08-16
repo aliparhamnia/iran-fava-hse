@@ -6,17 +6,17 @@
 
 <MudDialog>
     <DialogContent>
-        <MudTextField @bind-Value="_input.EmployeeNumber" Label="@L["EmployeeNumber"]" />
-        <MudTextField @bind-Value="_input.FirstName" Label="@L["FirstName"]" Class="mt-2" />
-        <MudTextField @bind-Value="_input.LastName" Label="@L["LastName"]" Class="mt-2" />
-        <MudTextField @bind-Value="_input.NationalId" Label="@L["NationalId"]" Class="mt-2" />
-        <div class="mt-2">
+        <MudStack Spacing="3">
+            <MudTextField @bind-Value="_input.EmployeeNumber" Label="@L["EmployeeNumber"]" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="_input.FirstName" Label="@L["FirstName"]" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="_input.LastName" Label="@L["LastName"]" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="_input.NationalId" Label="@L["NationalId"]" Variant="Variant.Outlined" />
             <AppDatePicker @bind-Value="_input.HireDate" Label="@L["HireDate"]" />
-        </div>
+        </MudStack>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Primary" OnClick="SaveAsync" Disabled="_saving">@L["CreateEmployee"]</MudButton>
+        <MudButton Variant="Variant.Text" OnClick="Cancel">@L["Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync" Disabled="_saving">@L["CreateEmployee"]</MudButton>
     </DialogActions>
 </MudDialog>
 

@@ -1,13 +1,16 @@
 @using Volo.Abp.AspNetCore.Components.Web.MudBlazorBasicTheme.Themes.Basic
 @using Volo.Abp.AspNetCore.Components.Web.Theming.MudBlazor.Routing
 @using Microsoft.Extensions.Options
+@using Hse.Platform.Blazor.Client.Theming
 @inject IOptions<AbpRouterOptions> RouterOptions
-<Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
-    <Found Context="routeData">
-        <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
-            <NotAuthorized>
-                <RedirectToLogin />
-            </NotAuthorized>
-        </AuthorizeRouteView>
-    </Found>
-</Router>
+<HseThemeRoot>
+    <Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
+                <NotAuthorized>
+                    <RedirectToLogin />
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+    </Router>
+</HseThemeRoot>

@@ -7,5 +7,6 @@ public class PlatformStyleBundleContributor : BundleContributor
     public override void ConfigureBundle(BundleConfigurationContext context)
     {
         context.Files.Add(new BundleFile("main.css", true));
+        context.Files.Add(new BundleFile("hse-theme.css", true));
     }
 }

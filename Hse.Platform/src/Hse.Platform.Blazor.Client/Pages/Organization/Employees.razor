@@ -13,38 +13,49 @@
     PageLayout.Title = L["Employees"];
 }
 
-<MudStack Row="true" Spacing="2" Class="mb-4" AlignItems="AlignItems.Center">
-    <MudTextField @bind-Value="_filter" Label="@L["Search"]" Immediate="true" />
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SearchAsync">@L["Search"]</MudButton>
-    <MudSpacer />
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateAsync">@L["CreateEmployee"]</MudButton>
-</MudStack>
+<MudPaper Class="hse-page-card pa-4" Elevation="0">
+    <MudStack Row="true" Spacing="2" Class="mb-4" AlignItems="AlignItems.Center" Wrap="Wrap.Wrap">
+        <MudTextField @bind-Value="_filter"
+                      Placeholder="@L["Search"]"
+                      Variant="Variant.Outlined"
+                      Immediate="true"
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="hse-search"
+                      Margin="Margin.Dense" />
+        <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="SearchAsync">@L["Search"]</MudButton>
+        <MudSpacer />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.PersonAdd" OnClick="OpenCreateAsync">@L["CreateEmployee"]</MudButton>
+    </MudStack>
 
-<MudTable Items="_items" Hover="true" Loading="_loading" Breakpoint="Breakpoint.Sm">
-    <HeaderContent>
-        <MudTh>@L["EmployeeNumber"]</MudTh>
-        <MudTh>@L["FirstName"]</MudTh>
-        <MudTh>@L["LastName"]</MudTh>
-        <MudTh>@L["HireDate"]</MudTh>
-        <MudTh>@L["Status"]</MudTh>
-        <MudTh></MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd>@context.EmployeeNumber</MudTd>
-        <MudTd>@context.FirstName</MudTd>
-        <MudTd>@context.LastName</MudTd>
-        <MudTd>@context.HireDate</MudTd>
-        <MudTd>@L[$"Enum:EmployeeStatus.{(int)context.Status}"]</MudTd>
-        <MudTd>
-            @if (context.Status == EmployeeStatus.Active)
-            {
-                <MudButton Size="Size.Small" Color="Color.Error" OnClick="() => TerminateAsync(context)">@L["Terminate"]</MudButton>
-            }
-        </MudTd>
-    </RowTemplate>
-</MudTable>
+    <MudTable Items="_items" Hover="true" Loading="_loading" Breakpoint="Breakpoint.Sm" Elevation="0" Class="hse-table">
+        <HeaderContent>
+            <MudTh>@L["EmployeeNumber"]</MudTh>
+            <MudTh>@L["FirstName"]</MudTh>
+            <MudTh>@L["LastName"]</MudTh>
+            <MudTh>@L["HireDate"]</MudTh>
+            <MudTh>@L["Status"]</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="@L["EmployeeNumber"]">@context.EmployeeNumber</MudTd>
+            <MudTd DataLabel="@L["FirstName"]">@context.FirstName</MudTd>
+            <MudTd DataLabel="@L["LastName"]">@context.LastName</MudTd>
+            <MudTd DataLabel="@L["HireDate"]">@context.HireDate</MudTd>
+            <MudTd DataLabel="@L["Status"]">@L[$"Enum:EmployeeStatus.{(int)context.Status}"]</MudTd>
+            <MudTd>
+                @if (context.Status == EmployeeStatus.Active)
+                {
+                    <MudButton Size="Size.Small" Variant="Variant.Text" Color="Color.Error" OnClick="() => TerminateAsync(context)">@L["Terminate"]</MudButton>
+                }
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
 
-<MudPagination Count="_pageCount" SelectedChanged="OnPageChanged" Class="mt-4" />
+    <div class="d-flex justify-end mt-4">
+        <MudPagination Count="_pageCount" SelectedChanged="OnPageChanged" Color="Color.Primary" />
+    </div>
+</MudPaper>
 
 @code {
     private readonly List<EmployeeDto> _items = [];

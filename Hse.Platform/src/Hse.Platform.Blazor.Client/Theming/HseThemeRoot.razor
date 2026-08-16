@@ -1,0 +1,10 @@
+@using Volo.Abp.Localization
+
+<MudThemeProvider Theme="HseTheme.Current" />
+<MudRTLProvider RightToLeft="CultureHelper.IsRtl">
+    @ChildContent
+</MudRTLProvider>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
